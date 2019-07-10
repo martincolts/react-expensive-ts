@@ -30,17 +30,11 @@ export default class ExpensiveForm extends React.Component<any, IExpensiveFormSt
     public handleChange(event: any) {
             const name = event.target.name;
             const value = event.target.value;
-        
-            // tslint:disable-next-line:no-console
-            console.log(this.state);
 
             this.setState({
                 ...this.state,
                 [name]: value
             });
-
-            // tslint:disable-next-line:no-console
-            console.log(this.state);
     }
 
     public saveExpensive() {

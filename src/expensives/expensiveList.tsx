@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import store from 'src/store/store';
 import Expensive from './expensive';
 import ExpensiveService from './expensiveService';
@@ -8,7 +9,7 @@ interface IExpensiveListState {
     expensives: Expensive[];
 }
 
-export default class ExpensiveList extends React.Component<any, IExpensiveListState> {
+class ExpensiveList extends React.Component<any, IExpensiveListState> {
     private expensiveService: ExpensiveService;
 
     constructor(props: any) {
@@ -27,8 +28,12 @@ export default class ExpensiveList extends React.Component<any, IExpensiveListSt
         })
     }
 
-    public componentDidMount() {
-        this.expensiveService.getAllExpensives();
+    public async componentDidMount() {
+        this.expensiveService.getAllExpensives()
+    }
+
+    public componentDidUpdate() {
+        store.subscribe(() => { this.setState({expensives: store.getState().expensives})})
     }
 
     public render() {
@@ -44,9 +49,11 @@ export default class ExpensiveList extends React.Component<any, IExpensiveListSt
                         <th>Categoria</th>
                     </tr>
                 </thead>
-                <ExpensiveTBody expensives={this.state.expensives}/>
+                <ExpensiveTBody/>
             </table>
         )
     }
 
 }
+
+export default connect()(ExpensiveList)

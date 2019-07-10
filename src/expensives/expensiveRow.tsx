@@ -7,15 +7,25 @@ interface IExpensiveRowProps extends React.Props<any> {
 
 export default class ExpensiveRow extends React.Component<IExpensiveRowProps, any> {
 
+    constructor(props: IExpensiveRowProps){
+        super(props);
+
+        this.state={
+            expensive: this.props.expensive
+        }
+    }
+
     public render() {
+        // tslint:disable-next-line:no-console
+        console.log(this.state);
         return (
             <tr>
-                <td>{this.props.expensive.id}</td>
-                <td>{this.props.expensive.name}</td>
-                <td>{this.props.expensive.description}</td>
-                <td>{this.props.expensive.created}</td>
-                <td>{this.props.expensive.price}</td>
-                <td>{this.props.expensive.categoryDTO.name}</td>
+                <td>{this.state.expensive.id}</td>
+                <td>{this.state.expensive.name}</td>
+                <td>{this.state.expensive.description}</td>
+                <td>{this.state.expensive.created}</td>
+                <td>{this.state.expensive.price}</td>
+                <td>{this.state.expensive.categoryDTO.name}</td>
             </tr>
         )
     }

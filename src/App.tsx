@@ -1,26 +1,23 @@
 import * as React from 'react';
-import './App.css';
-
-import ExpensiveForm from './expensives/expensiveForm';
-import ExpensiveList from './expensives/expensiveList';
-import logo from './logo.svg';
+import { Provider } from 'react-redux';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import Home from './home/home';
+import Login from './login/login';
+import store from './store/store';
 
 class App extends React.Component {
   public render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <ExpensiveList/>
-        <ExpensiveForm/>
-      </div>
+      <Provider store={store}>  
+        <Router>
+          <Switch>
+            <Route path="/login" component={Login}/>
+            <Route path="/home" component={Home}/>
+          </Switch>
+        </Router>
+      </Provider>
     );
   }
 }
 
-export default App;
+export default App; 

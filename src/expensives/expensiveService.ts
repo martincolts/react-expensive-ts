@@ -8,6 +8,8 @@ const url: string = "http://localhost:3000/expensives";
 export default class ExpensiveService {
     
     public async getAllExpensives(): Promise<Expensive[]> {
+        // tslint:disable-next-line:no-console
+        console.log("get expensives", store.getState());
         if (store.getState().expensives.length === 0) {
             const data = await axios.get(url);
             const expensives: Expensive[] = data.data.map((expensive: any) => this.populateExpensive(expensive));
